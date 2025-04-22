@@ -550,7 +550,7 @@ noncomputable instance : LinearOrder ZFInt where
   le_trans _ _ _ := le_trans
   le_antisymm _ _ := le_antisymm
   le_total _ _ := le_total
-  decidableLE := fun _ _ => Classical.propDecidable ((· ≤ ·) _ _)
+  toDecidableLE := fun _ _ => Classical.propDecidable ((· ≤ ·) _ _)
   lt_iff_le_not_le _ _ := lt_iff_le_not_le
 
 noncomputable instance : AddCommGroup ZFInt where
@@ -1311,7 +1311,7 @@ instance : LinearOrder {x // x ∈ Int} where
     have := ZFInt.instLinearOrder.le_antisymm x y h h'
     rwa [Equiv.invFun_as_coe, EmbeddingLike.apply_eq_iff_eq] at this
   le_total := (ZFInt.instLinearOrder.le_total · ·)
-  decidableLE := (ZFInt.instLinearOrder.decidableLE · ·)
+  toDecidableLE := (ZFInt.instLinearOrder.toDecidableLE · ·)
 
 end ZFIntEquivInt
 end Integers

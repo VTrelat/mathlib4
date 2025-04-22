@@ -701,7 +701,7 @@ instance : LinearOrder ZFNat where
   le_trans _ _ _ := le_trans
   le_antisymm _ _ := le_antisymm
   le_total _ _ := le_total
-  decidableLE := fun _ _ => Classical.propDecidable ((· ≤ ·) _ _)
+  toDecidableLE := fun _ _ => Classical.propDecidable ((· ≤ ·) _ _)
   lt_iff_le_not_le _ _ := lt_iff_le_not_le
 
 instance : IsStrictTotalOrder ZFNat (·<·) where

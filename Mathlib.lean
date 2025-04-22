@@ -5423,10 +5423,14 @@ import Mathlib.SetTheory.Surreal.Basic
 import Mathlib.SetTheory.Surreal.Dyadic
 import Mathlib.SetTheory.Surreal.Multiplication
 import Mathlib.SetTheory.ZFC.Basic
+import Mathlib.SetTheory.ZFC.Booleans
 import Mathlib.SetTheory.ZFC.Class
+import Mathlib.SetTheory.ZFC.Integers
+import Mathlib.SetTheory.ZFC.Naturals
 import Mathlib.SetTheory.ZFC.Ordinal
 import Mathlib.SetTheory.ZFC.PSet
 import Mathlib.SetTheory.ZFC.Rank
+import Mathlib.SetTheory.ZFC.Rationals
 import Mathlib.Std.Data.HashMap
 import Mathlib.Tactic
 import Mathlib.Tactic.Abel

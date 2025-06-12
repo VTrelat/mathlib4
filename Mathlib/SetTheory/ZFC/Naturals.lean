@@ -479,7 +479,7 @@ theorem le_total {x y : ZFNat} : x ≤ y ∨ y ≤ x := by
         right
         exact le_succ
 
-theorem lt_iff_le_not_le {x y : ZFNat} : x < y ↔ x ≤ y ∧ ¬ y ≤ x := by
+theorem lt_iff_le_not_ge {x y : ZFNat} : x < y ↔ x ≤ y ∧ ¬ y ≤ x := by
   apply Iff.intro
   · intro
     apply And.intro
@@ -699,7 +699,7 @@ instance : Preorder ZFNat where
   le := nat_le.le
   le_trans _ _ _ := le_trans
   le_refl _ := Or.inr rfl
-  lt_iff_le_not_le _ _ := lt_iff_le_not_le
+  lt_iff_le_not_ge _ _ := lt_iff_le_not_ge
 
 instance : LinearOrder ZFNat where
   le_refl _ := Or.inr rfl
@@ -707,7 +707,7 @@ instance : LinearOrder ZFNat where
   le_antisymm _ _ := le_antisymm
   le_total _ _ := le_total
   toDecidableLE := fun _ _ => Classical.propDecidable ((· ≤ ·) _ _)
-  lt_iff_le_not_le _ _ := lt_iff_le_not_le
+  lt_iff_le_not_ge _ _ := lt_iff_le_not_ge
 
 instance : IsStrictTotalOrder ZFNat (·<·) where
   trichotomous x y := by

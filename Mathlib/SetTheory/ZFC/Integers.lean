@@ -490,7 +490,7 @@ theorem le_total {a b : ZFInt} : a ≤ b ∨ b ≤ a := by
   · right; left; rw [ZFNat.add_comm a₂, ZFNat.add_comm a₁] at h; assumption
   · right; right; apply sound; rw [ZFNat.add_comm a₂, ZFNat.add_comm a₁] at h; assumption
 
-theorem lt_iff_le_not_le {x y : ZFInt} : x < y ↔ x ≤ y ∧ ¬y ≤ x := by
+theorem lt_iff_le_not_ge {x y : ZFInt} : x < y ↔ x ≤ y ∧ ¬y ≤ x := by
   apply Iff.intro
   · intro
     apply And.intro
@@ -551,7 +551,7 @@ noncomputable instance : LinearOrder ZFInt where
   le_antisymm _ _ := le_antisymm
   le_total _ _ := le_total
   toDecidableLE := fun _ _ => Classical.propDecidable ((· ≤ ·) _ _)
-  lt_iff_le_not_le _ _ := lt_iff_le_not_le
+  lt_iff_le_not_ge _ _ := lt_iff_le_not_ge
 
 noncomputable instance : AddCommGroup ZFInt where
   add := add
@@ -571,7 +571,7 @@ instance : PartialOrder ZFInt where
   le := int_le.le
   le_refl := le_refl
   le_trans := @le_trans
-  lt_iff_le_not_le := @lt_iff_le_not_le
+  lt_iff_le_not_ge := @lt_iff_le_not_ge
   le_antisymm := @le_antisymm
 
 instance : IsOrderedAddMonoid ZFInt where
@@ -974,7 +974,7 @@ instance : PartialOrder ZFInt where
   le_refl := le_refl
   le_trans := @le_trans
   le_antisymm := @le_antisymm
-  lt_iff_le_not_le := @lt_iff_le_not_le
+  lt_iff_le_not_ge := @lt_iff_le_not_ge
 
 instance : IsOrderedRing ZFInt where
   add_le_add_left _ _ h z := (add_le_add_iff_left z).mpr h
@@ -1312,8 +1312,8 @@ theorem ZFInt.exists_mono_bij.{u} :
     dsimp [LT.lt, instLTSubtypeMemInt, int_lt]
     apply Eq.to_iff
     congr
-    · exact Equiv.symm_apply_apply (Classical.choice instLTSubtypeMemInt._proof_42) x
-    · exact Equiv.symm_apply_apply (Classical.choice instLTSubtypeMemInt._proof_42) y
+    · exact Equiv.symm_apply_apply (Classical.choice _) x
+    · exact Equiv.symm_apply_apply (Classical.choice _) y
 
 /--
 The type `ZFInt` correctly represents the set `ZFSet.Int`.
@@ -1362,10 +1362,10 @@ instance : Preorder {x // x ∈ Int} where
   le x y := ZFInt.instPartialOrder.le x y
   le_refl x := ZFInt.instLinearOrder.le_refl x
   le_trans x y z := ZFInt.instLinearOrder.le_trans x y z
-  lt_iff_le_not_le x y := by
+  lt_iff_le_not_ge x y := by
     symm
     trans
-    · exact ZFInt.instLinearOrder.lt_iff_le_not_le x y |>.symm
+    · exact ZFInt.instLinearOrder.lt_iff_le_not_ge x y |>.symm
     · exact instEquivZFIntInt.mono_iff x y
 
 instance : LinearOrder {x // x ∈ Int} where
@@ -1377,7 +1377,7 @@ instance : LinearOrder {x // x ∈ Int} where
     rwa [Equiv.invFun_as_coe, EmbeddingLike.apply_eq_iff_eq] at this
   le_total := (ZFInt.instLinearOrder.le_total · ·)
   toDecidableLE := (ZFInt.instLinearOrder.toDecidableLE · ·)
-  lt_iff_le_not_le := instPreorderSubtypeMemInt.lt_iff_le_not_le
+  lt_iff_le_not_ge := instPreorderSubtypeMemInt.lt_iff_le_not_ge
 
 end ZFIntEquivInt
 end Integers
